@@ -15,8 +15,12 @@ const pool = new Pool({
 
 export async function fetchRevenue() {
     try {
+          console.log('Fetching revenue data...');
+          await new Promise((resolve) => setTimeout(resolve, 3000));
         const client = await pool.connect();
         const data = await client.query<Revenue>('SELECT * FROM revenue');
+            console.log('Data fetch completed after 3 seconds.');
+
         client.release();
         return data.rows;
     } catch (error) {
