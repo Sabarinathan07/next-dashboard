@@ -124,6 +124,7 @@ async function seedRevenue() {
 
 export async function GET() {
     try {
+        // seed the users, customers, invoices, and revenue tables
         await client.query('BEGIN');
         await seedUsers();
         await seedCustomers();
