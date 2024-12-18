@@ -15,11 +15,11 @@ const pool = new Pool({
 
 export async function fetchRevenue() {
     try {
-          console.log('Fetching revenue data...');
-          await new Promise((resolve) => setTimeout(resolve, 3000));
+        console.log('Fetching revenue data...');
+        await new Promise((resolve) => setTimeout(resolve, 3000));
         const client = await pool.connect();
         const data = await client.query<Revenue>('SELECT * FROM revenue');
-            console.log('Data fetch completed after 3 seconds.');
+        console.log('Data fetch completed after 3 seconds.');
 
         client.release();
         return data.rows;
@@ -95,7 +95,10 @@ export async function fetchCardData() {
 }
 
 const ITEMS_PER_PAGE = 6;
-export async function fetchFilteredInvoices(query: string, currentPage: number) {
+export async function fetchFilteredInvoices(
+    query: string,
+    currentPage: number
+) {
     const offset = (currentPage - 1) * ITEMS_PER_PAGE;
 
     try {
@@ -184,6 +187,7 @@ export async function fetchInvoiceById(id: string) {
             amount: invoice.amount / 100,
         }));
 
+        console.log(invoice);
         return invoice[0];
     } catch (error) {
         console.error('Database Error:', error);
