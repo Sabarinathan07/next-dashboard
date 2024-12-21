@@ -9,16 +9,23 @@ import { authConfig } from './auth.config';
 // Create a new pool instance
 const pool = new Pool({
     connectionString: process.env.DATABASE_URL,
+    ssl:
+        process.env.NODE_ENV === 'production'
+            ? { rejectUnauthorized: false }
+            : false,
 });
 
 async function getUser(email: string): Promise<User | undefined> {
     try {
         const client = await pool.connect();
+        console.log('Connected to database');
+
         try {
             const res = await client.query<User>(
                 'SELECT * FROM users WHERE email = $1',
                 [email]
             );
+            console.log('Fetched user:', res);
             return res.rows[0];
         } finally {
             client.release();
