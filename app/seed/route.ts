@@ -258,7 +258,7 @@ export async function GET() {
         );
     } catch (error) {
         await client.query('ROLLBACK');
-        return new Response(JSON.stringify({ error: error.message }), {
+        return new Response(JSON.stringify({ error: error }), {
             status: 500,
         });
     } finally {

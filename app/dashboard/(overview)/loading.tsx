@@ -1,9 +1,5 @@
-import React from 'react';
 import DashboardSkeleton from '@/app/ui/skeletons';
 
-
-const Loading = () => {
+export default function Loading() {
   return <DashboardSkeleton />;
-};
-
-export default Loading;
+}
