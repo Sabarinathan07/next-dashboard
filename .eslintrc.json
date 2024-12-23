@@ -1,6 +1,20 @@
 {
-  "extends": [
-    "next/core-web-vitals",
-    "next/typescript"
-  ]
+    "extends": ["next/core-web-vitals", "next/typescript"],
+    "rules": {
+        "react/react-in-jsx-scope": "off", // Disable for Next.js (no need to import React)
+        "@typescript-eslint/no-unused-vars": [
+            "warn",
+            { "argsIgnorePattern": "^_" }
+        ], // Ignore unused variables starting with "_"
+        "no-console": "warn" // Warn on console logs
+    },
+    "overrides": [
+        {
+            "files": ["src/**/*.{js,jsx,ts,tsx}"], // Target files in the `src` directory
+            "rules": {
+                "@typescript-eslint/no-explicit-any": "error", // Disallow `any` in the src directory
+                "react/prop-types": "off" // Disable prop-types for TypeScript files
+            }
+        }
+    ]
 }
