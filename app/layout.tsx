@@ -1,10 +1,15 @@
-import '@/app/ui/global.css';
-import { inter } from '@/app/ui/fonts';
+// layout.tsx
+import React from 'react';
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export const metadata = {
+    title: 'Your Page Title',
+    description: 'Your Page Description',
+};
+
+export default function Layout({ children }: { children: React.ReactNode }) {
     return (
         <html lang="en">
-            <body className={`${inter.className} antialiased`}>{children}</body>
+            <body>{children}</body>
         </html>
     );
 }
