@@ -38,7 +38,7 @@ To start the application locally, follow these steps:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/nextjs-dashboard.git
+   git clone https://github.com/sabarinathan07/nextjs-dashboard.git
    cd nextjs-dashboard
 
 2. Install the dependencies:
