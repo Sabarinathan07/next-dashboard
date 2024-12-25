@@ -23,7 +23,7 @@ export async function fetchRevenue() {
             client.release();
         }
     } catch (error) {
-        console.error('Database Error:', error);
+        console.log('Database Error:', error);
         throw new Error('Failed to fetch revenue data.');
     }
 }
@@ -48,7 +48,7 @@ export async function fetchLatestInvoices() {
             client.release();
         }
     } catch (error) {
-        console.error('Database Error:', error);
+        console.log('Database Error:', error);
         throw new Error('Failed to fetch the latest invoices.');
     }
 }
@@ -95,7 +95,7 @@ export async function fetchCardData() {
             client.release();
         }
     } catch (error) {
-        console.error('Database Error:', error);
+        console.log('Database Error:', error);
         throw new Error('Failed to fetch card data.');
     }
 }
@@ -139,7 +139,7 @@ export async function fetchFilteredInvoices(
             client.release();
         }
     } catch (error) {
-        console.error('Database Error:', error);
+        console.log('Database Error:', error);
         throw new Error('Failed to fetch invoices.');
     }
 }
@@ -171,7 +171,7 @@ export async function fetchInvoicesPages(query: string) {
             client.release();
         }
     } catch (error) {
-        console.error('Database Error:', error);
+        console.log('Database Error:', error);
         throw new Error('Failed to fetch total number of invoices.');
     }
 }
@@ -204,7 +204,7 @@ export async function fetchInvoiceById(id: string) {
             client.release();
         }
     } catch (error) {
-        console.error('Database Error:', error);
+        console.log('Database Error:', error);
         throw new Error('Failed to fetch invoice.');
     }
 }
@@ -226,7 +226,7 @@ export async function fetchCustomers() {
             client.release();
         }
     } catch (error) {
-        console.error('Database Error:', error);
+        console.log('Database Error:', error);
         throw new Error('Failed to fetch all customers.');
     }
 }
@@ -267,7 +267,7 @@ export async function fetchFilteredCustomers(query: string) {
             client.release();
         }
     } catch (error) {
-        console.error('Database Error:', error);
+        console.log('Database Error:', error);
         throw new Error('Failed to fetch customer table.');
     }
 }

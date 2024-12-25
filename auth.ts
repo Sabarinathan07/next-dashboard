@@ -1,17 +1,30 @@
 import NextAuth from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
 import bcrypt from 'bcrypt';
-import { sql } from '@vercel/postgres';
+import { Pool } from 'pg';
 import { z } from 'zod';
 import type { User } from '@/app/lib/definitions';
 import { authConfig } from './auth.config';
 
+// Create a new pool instance
+const pool = new Pool({
+    connectionString: process.env.DATABASE_URL,
+});
+
 async function getUser(email: string): Promise<User | undefined> {
     try {
-        const user = await sql<User>`SELECT * FROM users WHERE email=${email}`;
-        return user.rows[0];
+        const client = await pool.connect();
+        try {
+            const res = await client.query<User>(
+                'SELECT * FROM users WHERE email = $1',
+                [email]
+            );
+            return res.rows[0];
+        } finally {
+            client.release();
+        }
     } catch (error) {
-        console.error('Failed to fetch user:', error);
+        console.log('Failed to fetch user:', error);
         throw new Error('Failed to fetch user.');
     }
 }
@@ -24,12 +37,13 @@ export const { auth, signIn, signOut } = NextAuth({
                 const parsedCredentials = z
                     .object({
                         email: z.string().email(),
-                        password: z.string().min(6),
+                        password: z.string().min(5),
                     })
                     .safeParse(credentials);
 
                 if (parsedCredentials.success) {
                     const { email, password } = parsedCredentials.data;
+                    console.log('Signing in with credentials', email);
 
                     const user = await getUser(email);
                     if (!user) return null;

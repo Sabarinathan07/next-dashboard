@@ -66,7 +66,9 @@ export async function createInvoice(prevState: State, formData: FormData) {
             client.release();
         }
     } catch (error) {
-        console.error(error);
+        if (process.env.NODE_ENV !== 'production') {
+            console.error('Database Error:', error);
+        }
         return {
             message: 'Database Error: Failed to Create Invoice.',
         };
@@ -108,7 +110,9 @@ export async function updateInvoice(
             client.release();
         }
     } catch (error) {
-        console.error(error);
+        if (process.env.NODE_ENV !== 'production') {
+            console.error('Database Error:', error);
+        }
         return { message: 'Database Error: Failed to Update Invoice.' };
     }
 
@@ -125,7 +129,9 @@ export async function deleteInvoice(id: string) {
             client.release();
         }
     } catch (error) {
-        console.error(error);
+        if (process.env.NODE_ENV !== 'production') {
+            console.error('Database Error:', error);
+        }
         return { message: 'Database Error: Failed to Delete Invoice.' };
     }
 
@@ -137,9 +143,14 @@ export async function authenticate(
     formData: FormData
 ) {
     try {
+        if (process.env.NODE_ENV !== 'production') {
+            console.log('Signing in with credentials', formData);
+        }
         await signIn('credentials', formData);
     } catch (error) {
-        console.error(error, 'Failed to sign in');
+        if (process.env.NODE_ENV !== 'production') {
+            console.error('Failed to sign in', error);
+        }
         if (error instanceof AuthError) {
             switch (error.type) {
                 case 'CredentialsSignin':
