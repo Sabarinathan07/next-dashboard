@@ -1,6 +1,6 @@
 # Next.js Dashboard Application
 
-This is a Next.js project that I have deployed. You can view the live application at [next.sabari.dev](https://next.sabari.dev).
+This is a Next.js project that I have deployed. You can view the live application at [next.sabari.dev](https://next.sabari.dev)
 
 ## About
 
